@@ -1,1 +1,70 @@
+# codewars problems
+# Julia version 1.5
 
+# 8 kyu
+
+# Problem: What's the real floor?
+getrealfloor(n::Int)::Int = n-(n>12)-(n>0) # using "true" as "1" and "false" as "0" for operations.
+
+# Problem: The Wide-Mouthed frog!
+mouthsize(animal) = lowercase(animal) ≡ "alligator" ? "small" : "wide" # the ≡ (or ===) is supposed to be faster than ==.
+
+# Problem: Convert number to reversed array of digits
+digitize = digits # the "digits" function already does exactly what the problem require.
+
+# Problem: FIXME: Replace all dots
+function replacedots(s)
+  return replace(s, '.' => '-') # transforming the "->" into a "=>" as it is the correct syntax.
+end # it can be done in one line, with "replacedots(s) = replace(s, '.' => '-')", but it would be more changes to the original code.
+
+# Problem: Square(n) Sum
+squaresum(numbers) = sum(numbers .^ 2) # not my solution, the one I used used mapreduce.
+
+# Problem: Get the mean of an array
+getaverage(arr) = floor(sum(arr)/length(arr))
+
+# Problem: Quarter of the year
+quarterof(month) = floor((month+2)/3)
+
+# Problem: Reversed Words
+reversewords(str) = join(reverse(split(str)), " ") # split the words, in a list, then reverse the list order, than reform a string with a space as seperation of words elements.
+
+# Problem: Gravity Flip
+flip(direction::Char, boxes::Array{Int})::Array{Int} = sort(boxes, rev = direction ≡ 'L')
+
+# Problem: Cat years, Dog years
+human_years_cat_years_dog_years(human_years) = [human_years, 15+5(human_years > 1)+4(human_years - 1), 15+4(human_years > 1)+5(human_years-1)] # a use of booleans to making branchless coding. And no condition for the initial 15 years because it is assumed that the human_years will be at least one.
+
+# Problem: Returning Strings
+greet(name) = "Hello, $name how are you doing today?" # "$" is for string interpolation.
+
+# Problem: Return Negative
+module Kata
+  export makenegative
+  makenegative(number) = copysign(number, -1) # another way I like is "makenegative(number) = -abs(number)" or "makenegative = (-) ∘ abs"
+end
+
+# Problem: Thinkful - Logic Drills: Traffic light
+updatelight(current) = Dict("green" => "yellow", "yellow" => "red", "red" => "green")[current]
+
+# Problem: Remove First and Last Character
+removechar(str) = str[2:end-1]
+
+# Problem: String repeat
+repeatstr(n, s) = s ^ n # unlike a lot of languages, you use ^ on string to repeat them.
+
+# Problem: Calculate BMI
+function bmi(weight, height)
+  bmi = weight / height^2
+  bmi <= 18.5 ? "Underweight" : bmi <= 25.0 ? "Normal" : bmi <= 30.0 ? "Overweight" : "Obese" # you can use the ≤ symbol too
+end
+
+# Problem: Remove exclamation marks
+remove_exclamation_marks(s) = replace(s, "!" => "") # and if you use filter instead "remove_exclamation_marks(s) = filter(!=('!'), s)", not by me. The lack of space after the "!=" is important as you are calling the function (and that's also the reason why you need the parethesis around "('!')")
+
+# Find the first non_consecutive number
+function firstnonconsecutive(arr)
+  for i in 1:length(arr)-1
+    arr[i+1] - arr[i] ≠ 1 && return arr[i+1]
+  end
+end
